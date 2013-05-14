@@ -1,9 +1,0 @@
-{% extends 'base.html' %}
-{% block title %}String{% endblock %}
-
-{% block content %}
-<div id="refresh"></div>
-<h1>{{ key }} (string)</h1>
-    {% include 'objectTypes/string.html' %}
-    {% include 'objectForms/string.html' %}
-{% endblock %}
