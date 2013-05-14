@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Sorted Set{% endblock %}
+
+{% block content %}
+<div id="refresh"></div>
+<h1>{{ key }} (set)</h1>
+    {% include 'object_types/zset.html' %}
+    {% include 'object_forms/zset.html' %}
+{% endblock %}

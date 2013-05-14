@@ -1,0 +1,1 @@
+{"environments": {"REDIS01": {"host": "localhost", "port": "6379"}}}

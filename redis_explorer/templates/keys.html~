@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block includes %}
+    <script type=text/javascript src="{{ url_for('static', filename='filter.js') }}"></script>
+{% endblock %}
+{% block title %}Keys{% endblock %}
+
+{% block content %}
+<h1>Query Summary</h1>
+<table class="center">
+    <tr>
+        <td>Key pattern</td>
+        <td>{{ key_pattern }}</td>
+    </tr>
+    <tr>
+        <td>Number of results</td>
+        <td>{{ keys|count }}</td>
+    </tr>
+    <tr>
+        <td>Query execution time (seconds)</td>
+        <td>{{ query_time }}</td>
+    </tr>
+</table>
+<hr>
+
+<h1>Filters</h1>
+<form>
+    <input type="checkbox" class="filterCheckbox" name="type" value="string" checked="checked">String
+    <input type="checkbox" class="filterCheckbox" name="type" value="hash" checked="checked">Hash
+    <input type="checkbox" class="filterCheckbox" name="type" value="list" checked="checked">List
+    <input type="checkbox" class="filterCheckbox" name="type" value="set" checked="checked">Set
+</form>
+<hr>
+
+<h1>Query Results</h1> 
+<table class="center">
+    <thead>
+        <th>Key</th>
+        <th>Type</th>
+    </thead>
+    {% for key in keys %}
+        <tr class="keySearchMatch">
+            <td><a href="/view/{{ key['key'] }}">{{ key['key'] }}</a></td>
+            <td>{{ key['type'] }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<img id="loadingImage" class="center" src="/static/loading.gif" />
+{% endblock %}

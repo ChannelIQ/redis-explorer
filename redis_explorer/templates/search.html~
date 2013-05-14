@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Redis Explorer{% endblock %}
+{% block content %}
+<h1>Search for keys by pattern</h1>
+<p>Use with care, particularly in a production environment.</p>
+<div id="search">
+    <form>
+        <input type="text" name="keyPattern" class="searchBox"/>
+        <input type="submit" name="search" value="Search" />
+    </form>
+</div>
+{% endblock %}

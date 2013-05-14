@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Redis Explorer{% endblock %}
+
+{% block content %}
+    <h1>Hosts</h1>
+    <table class="center">
+        <thead>
+            <th>Name</th>
+            <th>Host</th>
+            <th>Port</th>
+            <th>Delete</th>
+        </thead>
+    {% for key, value in envs['environments'].iteritems() %}
+        <tr>
+            <td>{{ key }}</td>
+            <td>{{ value['host'] }}</td>
+            <td>{{ value['port'] }}</td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" name="delete">
+                    <input type="hidden" name="env" value="{{ key }}">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>            
+    {% endfor %}
+    </table>
+    <hr>
+    <h1>Add Hosts</h1>
+    {% include 'objectForms/environment.html' %}
+{% endblock %}

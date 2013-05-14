@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+    <head>
+    {% block head %}
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <script type=text/javascript src="{{ url_for('static', filename='jquery.js') }}"></script>
+        <script type=text/javascript src="{{ url_for('static', filename='jquery.cookie.js') }}"></script>
+        <script type=text/javascript src="{{ url_for('static', filename='general.js') }}"></script>
+    {% block includes %}{% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+    {% endblock %}
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/search/">Search</a></li>
+                <li><a href="/explore/"><del>Explore<del></a></li>
+                <li><a href="/environments/">Environments</a></li>
+                <li>
+                    <form>
+                        <p>
+                            <select name="environments" class="envSelector">
+                                {% for key, value in envs['environments'].iteritems() %}
+                                    <option value="{{ key }}">{{ key }}</option>
+                                {% endfor %}
+                            </select>
+                        </p>
+                    </form>
+                </li>
+                <br>
+                <li id="navRefresh">
+                    <form>
+                        <p>
+                            Refresh every <input id="refreshRateInput" type="text" name="refreshRate" value="0"> seconds. 
+                        </p>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+
+      <div id="content">{% block content %}{% endblock %}</div>
+      <div id="footer">
+        {% block footer %}{% endblock %}
+      </div>
+    </body>
+</html>

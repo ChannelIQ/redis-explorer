@@ -1,0 +1,55 @@
+html * { font-family: Georgia !important; }
+h1, h2, h3 { color: #FFF !important; }
+body { background-color:#2F2F2F; text-align: center; }
+
+form { 
+    color: #FFF;
+    margin: 0;
+    padding: 0;
+}
+
+table { margin: 1em; border-collapse: collapse; color: #000 !important; }
+table.center { margin-left: auto; margin-right: auto; }
+div.center { margin-left: auto; margin-right: auto; }
+
+td, th { padding: .3em; border: 1px #2F2F2F solid; }
+thead { background: #aaa; }
+tbody { background: #ccc; }
+
+img.center {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   width: 50px;
+   height: 50px;
+   margin-top: auto;
+   margin-left: auto;
+}
+
+p { color: #FFF; }
+
+nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+
+nav li { display: inline-block; }
+nav a { color: #FFF; padding: 5px; }
+nav ul { -webkit-padding-start: 0px; }
+input.searchBox { width: 250px; }
+
+input#refreshRateInput { width: 20px; text-align: center; }
+
+hr {
+    margin: 2em 0 0;
+    display: block;
+    border: none;
+    color: #ccc;
+    height: 1px;
+    background: #2F2F2F;
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#fff), to(#2F2F2F));
+    background: -moz-linear-gradient(left, #2F2F2F 0%, #FFF 50%, #2F2F2F 100%);
+}

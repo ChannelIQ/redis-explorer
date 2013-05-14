@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Set{% endblock %}
+
+{% block content %}
+<div id="refresh"></div>
+<h1>{{ key }} (set)</h1>
+    {% include 'objectTypes/set.html' %}
+    {% include 'objectForms/set.html' %}
+{% endblock %}

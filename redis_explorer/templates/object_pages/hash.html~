@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Hash{% endblock %}
+
+{% block content %}
+<div id="refresh"></div>
+<h1>{{ key }} (hash)</h1>
+    {% include 'objectTypes/hash.html' %}
+    {% include 'objectForms/hash.html' %}
+{% endblock %}

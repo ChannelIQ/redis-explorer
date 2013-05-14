@@ -1,0 +1,19 @@
+<table class="primitive center">
+    <thead>
+        <th></th>
+        <th>Item</th>
+        <th>Type</th>
+    </thead>
+    {% for it in item %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        {% if 'none' in it['type'] %}
+            <td>{{ it['key'] }}</td>
+            <td>{{ it['type'] }}</td>
+        {% else %}
+            <td><a href="/view/{{ it['key'] }}">{{ it['key'] }}</a></td>
+            <td>{{ it['type'] }}</td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>

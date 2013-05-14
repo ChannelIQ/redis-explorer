@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}List{% endblock %}
+
+{% block includes %}
+<!--    <script type=text/javascript src="{{ url_for('static', filename='list.js') }}"></script>-->
+{% endblock %}
+
+{% block content %}
+<h1>Add Item: {{ key }}</h1>
+<div class="center">
+    <hr><h2>Key/Value</h2>
+    {% include 'object_forms/string.html' %}
+    <hr><h2>List</h2>
+    {% include 'object_forms/list.html' %}
+    <hr><h2>Set</h2>
+    {% include 'object_forms/set.html' %}
+    <hr><h2>Hash</h2>
+    {% include 'object_forms/hash.html' %}
+</div>
+{% endblock %}

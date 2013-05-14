@@ -1,0 +1,13 @@
+<table class="center primitive">
+    <thead>
+        <th>Key</th>
+        <th>Type</th>
+    </thead>
+    {% for key in keys %}
+        <tr class="keySearchMatch">
+            <td><a href="{{ key['url'] }}">{{ key['key'] }}</a></td>
+            <td>{{ key['type'] }}</td>
+        </tr>
+    {% endfor %}
+</table>
+

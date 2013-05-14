@@ -1,0 +1,11 @@
+<form method="POST">
+    {% if item %}
+    <input type="radio" name="end" value="front">Front
+    <input type="radio" name="end" value="back" checked>Back<br>
+    {% else %}
+    <input type="hidden" name="end" value="front">
+    {% endif %}
+    Entry: <input type="text" name="value">
+    <input type="hidden" name="type" value="list">
+    <input type="submit" value="Add Entry">
+</form>

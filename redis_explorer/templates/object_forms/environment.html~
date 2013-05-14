@@ -1,0 +1,7 @@
+<form method="POST">
+    <input type="hidden" name="addHost">
+    Name: <input type="text" name="name">
+    Host: <input type="text" name="host">
+    Port: <input type="text" name="port">
+    <input type="submit" value="Add Field">
+</form>
