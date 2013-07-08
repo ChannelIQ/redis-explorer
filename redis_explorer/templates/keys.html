@@ -28,22 +28,28 @@
     <input type="checkbox" class="filterCheckbox" name="type" value="hash" checked="checked">Hash
     <input type="checkbox" class="filterCheckbox" name="type" value="list" checked="checked">List
     <input type="checkbox" class="filterCheckbox" name="type" value="set" checked="checked">Set
+    <input type="checkbox" class="filterCheckbox" name="type" value="zset" checked="checked">Sorted Set
 </form>
 <hr>
 
-<h1>Query Results</h1> 
-<table class="center">
-    <thead>
-        <th>Key</th>
-        <th>Type</th>
-    </thead>
-    {% for key in keys %}
-        <tr class="keySearchMatch">
-            <td><a href="/view/{{ key['key'] }}">{{ key['key'] }}</a></td>
-            <td>{{ key['type'] }}</td>
-        </tr>
-    {% endfor %}
-</table>
-
+<h1>Query Results</h1>
+<form name="queryResults" method="POST">
+    <input type="submit" name="delete" value="Delete Selected"/>
+    <input type="submit" name="downlaod" value="Download Selected as JSON (coming soon)"/>
+    <table class="center">
+        <thead>
+            <th><input type="checkbox" class="selectAll"></th>
+            <th>Key</th>
+            <th>Type</th>
+        </thead>
+        {% for key in keys %}
+            <tr class="keySearchMatch">
+                <td><input type="checkbox" name="queryResultRow" value="{{ key['key'] }}" class="queryResultRow"></td>
+                <td><a href="/view/{{ key['key'] }}">{{ key['key'] }}</a></td>
+                <td>{{ key['type'] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</form>
 <img id="loadingImage" class="center" src="/static/loading.gif" />
 {% endblock %}

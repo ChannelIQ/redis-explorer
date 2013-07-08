@@ -1,6 +1,7 @@
 from flask import render_template, request
 from redis_explorer import app
 import redis, time, json
+import redisdatamanager as rdm
 
 ENVS_FILE = 'redis_explorer/envs.json'
 ENVS = json.load(open(ENVS_FILE))
@@ -31,25 +32,36 @@ def display_environments():
                 json.dump(ENVS, f)
     return render_template('envs.html')
 
-@app.route('/search/')
+@app.route('/search/', methods=['GET', 'POST'])
 def display_search():
-    key_pattern = request.args.get('key_pattern', '')
-    if key_pattern:
-        rc = _get_host_and_port(request)
-        start_time = time.time()
-        items = sorted(rc.keys(pattern=key_pattern))
-        end_time = time.time()
-        keys = []
-        for item in items:
-            object_type = rc.type(item)
-            key = {
-                'key' : item,
-                'type' : object_type,
-            }
-            keys.append(key)
-        return render_template('keys.html', keys=keys, key_pattern=key_pattern, query_time=(end_time - start_time))
-    else:
+    redis_manager = _get_rdm(request)
+    if request.method == 'POST':
+        if 'delete' in request.form:
+            redis_manager.delete_keys(request.form.getlist('queryResultRow'))
+        if 'download' in request.form:
+            return 'not implemented yet'
         return render_template('search.html')
+    else:
+        key_pattern = request.args.get('key_pattern', '')
+        key_patterns = request.args.get('key_patterns', '')
+        if key_pattern or key_patterns:
+            patterns = key_pattern
+            if key_patterns:
+                if 'stripQuotes' in request.args:
+                    key_patterns = key_patterns.replace('"', '')
+                delimitor = request.args.get('delimitor', '')
+                if 'space' in delimitor:
+                    patterns = key_patterns.split(' ')
+                if 'comma' in delimitor:
+                    patterns = key_patterns.split(',')
+                else:
+                    patterns = key_patterns.split(' ')
+            start_time = time.time()
+            keys = redis_manager.get_keys(patterns, with_types=True, sorted_by_key=True)
+            end_time = time.time()
+            return render_template('keys.html', keys=keys, key_pattern=' '.join(patterns), query_time=(end_time - start_time))
+        else:
+            return render_template('search.html')
 
 @app.route('/view/<key>', methods=['GET', 'POST'])
 def display_key(key):
@@ -156,6 +168,8 @@ def _form_handler(rc, key, key_type, request):
     if 'string' in key_type:
         rc.set(key, request.form['value'])
 
+
+# should be renamed as get redis client
 def _get_host_and_port(request):
     env = request.cookies.get('currentEnvironment')
     host = 'localhost'
@@ -164,6 +178,16 @@ def _get_host_and_port(request):
         host = ENVS['environments'][env]['host']
         port = int(ENVS['environments'][env]['port'])
     return redis.Redis(host, port)
+
+def _get_rdm(request):
+    env = request.cookies.get('currentEnvironment')
+    host = 'localhost'
+    port = 6379
+    if env:
+        host = ENVS['environments'][env]['host']
+        port = int(ENVS['environments'][env]['port'])
+    return rdm.RedisDataManager(host=host, port=port)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

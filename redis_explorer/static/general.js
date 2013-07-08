@@ -23,6 +23,17 @@ $(document).ready(function() {
         document.onkeypress = stopRKey;
     }
 
+    // Allow for query results to be selected all at once
+    $('input.selectAll').change(function() {
+        var checkState = $(this).is(":checked");
+        $('input.queryResultRow').each(function() {
+            // Need an if here to check that it is shown
+            if($(this).parent().parent().is(":visible")) {
+                $(this).prop('checked', checkState);
+            }
+        });
+    });
+
 });
 
 function refreshList(interval) {

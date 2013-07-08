@@ -12,12 +12,15 @@ $(document).ready(function() {
         var checked = $(this).prop('checked');
         //$('#loadingImage').show();
         $('.keySearchMatch').each(function() {
-            if ($(this).children('td').eq(1).text() == type) {
+            if ($(this).children('td').eq(2).text() == type) {
                 if (checked) {
                     $(this).show();
                 } else {
                     $(this).hide();
                 }
+
+                // Uncheck to avoid accidental deletes
+                $(this).find(':checkbox').attr("checked", false);
             }
         });
         $('#loadingImage').hide();
